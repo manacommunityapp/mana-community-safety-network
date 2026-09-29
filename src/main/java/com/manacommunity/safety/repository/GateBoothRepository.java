@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface GateBoothRepository extends JpaRepository<GateBooth, Long> {
+    List<GateBooth> findByCommunityId(Long communityId);
     List<GateBooth> findByCommunityIdAndIsActiveTrue(Long communityId);
     Optional<GateBooth> findByCommunityIdAndGateCode(Long communityId, String gateCode);
 }

@@ -1,7 +1,10 @@
 package com.manacommunity.safety.controller;
 
 import com.manacommunity.common.dto.ApiResponse;
+import com.manacommunity.safety.adapter.SecurityDeviceDispatcher;
 import com.manacommunity.safety.domain.entities.HardwareDevice;
+import com.manacommunity.safety.dto.adapter.SecurityDecisionResult;
+import com.manacommunity.safety.dto.adapter.SecurityDeviceEvent;
 import com.manacommunity.safety.dto.request.AnprEventRequest;
 import com.manacommunity.safety.dto.request.CctvAlertRequest;
 import com.manacommunity.safety.dto.request.RegisterDeviceRequest;
@@ -21,6 +24,7 @@ import java.util.List;
 public class HardwareIntegrationController {
 
     private final IntegrationAdapterService integrationAdapterService;
+    private final SecurityDeviceDispatcher deviceDispatcher;
 
     @PostMapping("/devices")
     public ResponseEntity<ApiResponse<HardwareDevice>> registerDevice(@Valid @RequestBody RegisterDeviceRequest req) {
@@ -30,6 +34,15 @@ public class HardwareIntegrationController {
     @GetMapping("/devices")
     public ResponseEntity<ApiResponse<List<HardwareDevice>>> getDevices(@RequestParam Long communityId) {
         return ResponseEntity.ok(ApiResponse.success("Devices loaded", integrationAdapterService.getDevices(communityId)));
+    }
+
+    @PostMapping("/webhook/device-event")
+    public ResponseEntity<ApiResponse<SecurityDecisionResult>> onDeviceEvent(
+            @RequestParam Long communityId,
+            @RequestBody SecurityDeviceEvent event) {
+        event.setCommunityId(communityId);
+        SecurityDecisionResult result = deviceDispatcher.dispatch(communityId, event);
+        return ResponseEntity.ok(ApiResponse.success("Device event processed via Adapter Layer", result));
     }
 
     @PostMapping("/webhook/anpr")

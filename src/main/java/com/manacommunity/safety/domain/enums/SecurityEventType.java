@@ -1,0 +1,26 @@
+package com.manacommunity.safety.domain.enums;
+
+public enum SecurityEventType {
+    VISITOR_ENTRY,
+    VEHICLE_ENTRY,
+    DELIVERY_ENTRY,
+    STAFF_ENTRY,
+    CONTRACTOR_ENTRY,
+    CAB_ENTRY,
+    VISITOR_EXIT,
+    VEHICLE_EXIT,
+    DELIVERY_EXIT,
+    STAFF_EXIT,
+    CONTRACTOR_EXIT,
+    CAB_EXIT,
+    ACCESS_GRANTED,
+    ACCESS_DENIED,
+    QR_SCANNED,
+    OTP_VERIFIED,
+    ANPR_DETECTED,
+    RFID_SCANNED,
+    PATROL_CHECKPOINT,
+    WATCHLIST_MATCH,
+    PANIC_TRIGGERED,
+    GATE_DEVICE_OFFLINE
+}

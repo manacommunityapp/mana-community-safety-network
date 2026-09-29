@@ -13,5 +13,7 @@ public interface VisitorPassRepository extends JpaRepository<VisitorPass, Long> 
     List<VisitorPass> findByCommunityIdAndResidentIdOrderByCreatedAtDesc(Long communityId, Long residentId);
     List<VisitorPass> findByCommunityIdAndStatusOrderByCreatedAtDesc(Long communityId, VisitorStatus status);
     Optional<VisitorPass> findByCommunityIdAndPassCode(Long communityId, String passCode);
+    Optional<VisitorPass> findByPassToken(String passToken);
+    Optional<VisitorPass> findByCommunityIdAndPassToken(Long communityId, String passToken);
     List<VisitorPass> findByCommunityIdAndFlatNumberOrderByCreatedAtDesc(Long communityId, String flatNumber);
 }

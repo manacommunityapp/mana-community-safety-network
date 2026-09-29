@@ -2,10 +2,15 @@ package com.manacommunity.safety.domain.enums;
 
 public enum VisitorType {
     GUEST,
-    CAB,
+    FAMILY,
+    FRIEND,
+    CAB_DRIVER,
     DELIVERY,
-    SERVICE_TECHNICIAN,
+    SERVICE_PROVIDER,
+    DOMESTIC_HELP,
     CONTRACTOR,
-    HOME_MAINTENANCE,
+    COURIER,
+    VENDOR,
+    EVENT_GUEST,
     OTHER
 }

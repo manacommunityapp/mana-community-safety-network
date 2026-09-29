@@ -59,6 +59,25 @@ public class VisitorPass {
     @Column(length = 10)
     private String passCode; // 6-digit verification code
 
+    @Column(length = 100, unique = true)
+    private String passToken; // Opaque Token, e.g. PASS-7A82F91...
+
+    @Column(length = 256)
+    private String signature; // HMAC-SHA256 tamper-proof signature
+
+    @Column(length = 128)
+    private String otpHash; // BCrypt/SHA-256 hash of OTP (never store plain OTP)
+
+    private LocalDateTime otpExpiresAt;
+
+    @Builder.Default
+    private Integer otpAttemptCount = 0;
+
+    @Builder.Default
+    private Integer otpMaxAttempts = 3;
+
+    private LocalDateTime otpUsedAt;
+
     @Column(length = 500)
     private String qrPayload;
 
